@@ -4,6 +4,7 @@
 
 import PySimpleGUI as sg
 import os
+import playsound
 
 
 layout = [
@@ -22,7 +23,7 @@ window = sg.Window('My File Browser', layout, size=(600,150))
 
 #.m4a .webm . mp3
 musicPaths = [".m4a", ".mp3", ".webm"]
-
+filePaths = []
 def play(path):
     #We have the folder now do something with it
     
@@ -31,7 +32,10 @@ def play(path):
     for file in os.listdir(path):
         for extension in musicPaths:
             if file.endswith(extension):
-                print(os.path.join(path, file))
+                filePaths.append(os.path.join(path, file))
+    
+    for i in filePaths:
+        playsound(i)
 
 while True:
     event, values = window.read()
